@@ -7,7 +7,7 @@ import {
     getKeypairFromEnvironment,
   } from "@solana-developers/helpers";
 
-export const JOURNAL_PROGRAM_ID = new PublicKey("7AGmMcgd1SjoMsCcXAAYwRgB9ihCyM8cZqjsUqriNRQt");
+export const JOURNAL_PROGRAM_ID = new PublicKey("2NXL5UWKQeb5JNBUwSRW6xVKc15cJfg9GT3oSEzpadYK");
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
 const keypair = getKeypairFromEnvironment("SECRET_KEY");
 
@@ -40,10 +40,10 @@ function useAnchorProvider() {
 
 const provider = useAnchorProvider();
 const program = new Program(JournalIDL as Journal, provider);
-//const signature = await program.methods.createJournalEntry("Hello from node.js", "Mesagge generated from node.js").rpc();
+
 
 // Derive the journalEntry PDA based on the title and owner (wallet's public key)
-const [journalEntryPDA] = await PublicKey.findProgramAddress(
+const [journalEntryPDA] = await PublicKey.findProgramAddressSync(
     [Buffer.from(title), wallet.publicKey.toBuffer()],
     JOURNAL_PROGRAM_ID
   );
@@ -51,8 +51,14 @@ const [journalEntryPDA] = await PublicKey.findProgramAddress(
 
 
 // Create Journal Entry
-const signature = await program.methods
-  .createJournalEntry(title, "Message generated from node.js").rpc();
+const signature = await program.methods.createJournalEntry("Hello 2 from node.js", "Mesagge generated from node.js").rpc();
+
+//Update hournat Entry
+//const signature = await program.methods.updateJournalEntry(title, "Message generated from node.js").rpc();
+
+  console.log(
+    `You can view your transaction on Solana Explorer at:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`,
+  );
 
 
 
