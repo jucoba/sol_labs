@@ -15,17 +15,21 @@ export const fetchReviews = async (
         }
     );
     account_list = accounts.map((account) => account.pubkey);
+    console.log(account_list[0]);
 
     const keys = await connection.getMultipleAccountsInfo(account_list);
+    console.log(keys);
 
     const reviews = keys.reduce((accum: Review[], account) => {
         const rew = Review.deserialize(account?.data);
+        console.log(rew);
         if (!rew) {
             return accum;
         }
 
         return [...accum, rew];
     }, []);
+    console.log(reviews)
 
     return reviews;
 };
