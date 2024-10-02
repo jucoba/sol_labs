@@ -1,8 +1,10 @@
-  import * as anchor from "@coral-xyz/anchor";
-  
-  import { Program, Idl } from "@coral-xyz/anchor";
-  import { expect } from "chai";
-  import { AnchorCounter } from "../target/types/anchor_counter";
+import * as anchor from "@coral-xyz/anchor";
+
+import { Program, Idl } from "@coral-xyz/anchor";
+import { expect } from "chai";
+import { AnchorCounter } from "../target/types/anchor_counter";
+import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
+import { BN } from "bn.js";
   
   describe("anchor-counter", () => {
     // Configure the client to use the local cluster.
@@ -79,6 +81,20 @@
 
       const account = await program.account.counter.fetch(counter.publicKey);
       expect(account.count.toNumber()).to.equal(2)
+
+    });
+
+    it ("Should only be one account with 0 count", async () => {
+      
+      const accounts = await program.account.counter.all(
+        [{
+          memcmp: {
+            offset: 8,
+            bytes: bs58.encode(new BN(0, "le").toArray()),
+          },
+        },]
+      )
+      expect(accounts.length).to.equal(1)
 
     });
 
