@@ -2,8 +2,8 @@ import * as anchor from "@coral-xyz/anchor";
 import { AnchorProvider, Program } from "@coral-xyz/anchor";
 import { expect } from "chai";
 import { AnchorMovieReviewProgram } from "../target/types/anchor_movie_review_program";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import idl from "../target/idl/anchor_movie_review_program.json";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
+
  
 describe("anchor-movie-review-program", () => {
   // Configure the client to use the local cluster.
