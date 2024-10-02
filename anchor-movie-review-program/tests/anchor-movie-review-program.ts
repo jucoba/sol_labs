@@ -1,7 +1,9 @@
 import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import { AnchorProvider, Program } from "@coral-xyz/anchor";
 import { expect } from "chai";
 import { AnchorMovieReviewProgram } from "../target/types/anchor_movie_review_program";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import idl from "../target/idl/anchor_movie_review_program.json";
  
 describe("anchor-movie-review-program", () => {
   // Configure the client to use the local cluster.
@@ -10,6 +12,8 @@ describe("anchor-movie-review-program", () => {
  
   const program = anchor.workspace
     .AnchorMovieReviewProgram as Program<AnchorMovieReviewProgram>;
+
+  
  
   const movie = {
     title: "Just a test movie",
@@ -50,6 +54,34 @@ describe("anchor-movie-review-program", () => {
   });
  
   it("Deletes a movie review", async () => {
-    expect(1).to.equal(1)
+    const tx = await program.methods.deleteMovieReview(movie.title).rpc();
+
+    try {
+      const account = await program.account.movieAccountState.fetch(moviePda);
+      throw new Error("Account still exists after deletion");
+    } catch (err) {
+      expect(err.message).to.contain("Account does not exist");
+    }
   });
+
+  it("Movie review should not be updated with signer different than the owner`", async () => {
+    
+    const fakeSigner = anchor.web3.Keypair.generate();
+    
+    const txAdd = await program.methods.addMovieReview(movie.title, movie.description, movie.rating)
+    .rpc();
+
+    
+    
+    try {
+      const txUpdate = await program.methods.updateMovieReview(movie.title, "", 1).signers([fakeSigner])
+      .rpc();
+      throw new Error("Account was bupdated with fake signer");
+    } catch (err) {
+      expect(err.message).to.contain("unknown signer");
+    }
+
+    
+  });
+  
 });
