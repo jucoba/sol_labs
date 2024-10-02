@@ -24,7 +24,17 @@ export function useCounterProgram() {
 
   const accounts = useQuery({
     queryKey: ['counter', 'all', { cluster }],
-    queryFn: () => program.account.counter.all(),
+    queryFn: async () => {
+      // Fetch all counter accounts
+      const allAccounts = await program.account.counter.all();
+  
+      // Filter the accounts to only include those signed by the specific address
+      const filteredAccounts = allAccounts.filter((account) => {
+        return account.publicKey.equals(new PublicKey("9o3uhcme91gQ142YR6TbFrj2NZ8wEzw4AgAj3EAGvnWj")); // Filter by the user field
+      });
+  
+      return filteredAccounts;
+    },
   });
 
   const getProgramAccount = useQuery({
