@@ -22,6 +22,22 @@ pub mod anchor_counter {
         Ok(())
     }
 
+    pub fn decrement(ctx: Context<Update>) -> Result<()> {
+        let counter = &mut ctx.accounts.counter;
+        msg!("Current count:{ }", counter.count);
+        counter.count = counter.count.checked_sub(1).unwrap();
+        msg!("Counter decremented: New count:{ }", counter.count);
+        Ok(())
+    }
+
+    pub fn increment_by(ctx: Context<Update>, increment: u8) -> Result<()> {
+        let counter = &mut ctx.accounts.counter;
+        msg!("Current count:{ }", counter.count);
+        counter.count = counter.count.checked_add(increment as u64).unwrap();
+        msg!("Counter incremented: New count:{ }", counter.count);
+        Ok(())
+    }
+
 }
 #[derive(Accounts)]
 pub struct Initialize<'info> {
