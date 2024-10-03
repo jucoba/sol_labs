@@ -1,0 +1,17 @@
+{
+    "name": "Cat2 NFT",
+    "symbol": "EMB2",
+    "description": "This is a cat dog",
+    "external_url": "https://solana.com/",
+    "image": "https://gateway.irys.xyz/HxrBbphpNafn48CnKwsBPQqqoYvGL3Wm5SrAPriK8s2",
+    "attributes": [
+        {
+            "trait_type": "species",
+            "value": "Cat"
+        },
+        {
+            "trait_type": "breed",
+            "value": "Cool2"
+        }
+    ]
+}
