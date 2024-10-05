@@ -39,7 +39,7 @@ const uintSig = await(
     merkleTree,
     collectionMint,
     metadata: {
-      name: "My NFT 2",
+      name: "My NFT 3",
       uri: "https://chocolate-wet-narwhal-846.mypinata.cloud/ipfs/QmeBRVEmASS3pyK9YZDkRUtAham74JBUZQE3WD4u4Hibv9",
       sellerFeeBasisPoints: 0, // 0%
       collection: { key: collectionMint, verified: false },
@@ -55,12 +55,16 @@ const uintSig = await(
 ).signature;
  
 const b64Sig = base58.deserialize(uintSig);
-console.log(b64Sig);
+console.log("Signature: ",b64Sig);
 
 const leaf: LeafSchema = await parseLeafFromMintToCollectionV1Transaction(
     umi,
     uintSig,
   );
+
+  console.log("Leaf: ",leaf);
+  console.log("Leaf Index: ",leaf.nonce);
+
   const assetId = findLeafAssetIdPda(umi, {
     merkleTree,
     leafIndex: leaf.nonce,
