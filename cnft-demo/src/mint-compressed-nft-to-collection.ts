@@ -13,6 +13,7 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { getKeypairFromFile } from "@solana-developers/helpers";
 import { clusterApiUrl } from "@solana/web3.js";
+import { base58 } from "@metaplex-foundation/umi/serializers";
  
 const umi = createUmi(clusterApiUrl("devnet"));
  
@@ -53,8 +54,8 @@ const uintSig = await(
   }).sendAndConfirm(umi)
 ).signature;
  
-//const b64Sig = base58.deserialize(uintSig);
-console.log(uintSig);
+const b64Sig = base58.deserialize(uintSig);
+console.log(b64Sig);
 
 const leaf: LeafSchema = await parseLeafFromMintToCollectionV1Transaction(
     umi,
