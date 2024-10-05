@@ -1,5 +1,5 @@
 import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
-import { mplBubblegum } from "@metaplex-foundation/mpl-bubblegum";
+import { findLeafAssetIdPda, mplBubblegum } from "@metaplex-foundation/mpl-bubblegum";
 import {
   keypairIdentity,
   publicKey as UMIPublicKey,
@@ -21,7 +21,14 @@ const umiKeypair = umi.eddsa.createKeypairFromSecretKey(localKeypair.secretKey);
 // load the MPL Bubblegum program, dasApi plugin and assign a signer to our umi instance
 umi.use(keypairIdentity(umiKeypair)).use(mplBubblegum()).use(dasApi());
 
-const assetId = UMIPublicKey("ApNvoWb8Ts9gJ31M3DU2G2YGmKY9DgzdnS72L5J4iw5z");
+const merkleTree = UMIPublicKey("2SXaxrvuKZh6MjLjPSWnSYNde5bQcjbktSzic3xXMLre");
+
+const assetId = findLeafAssetIdPda(umi, {
+  merkleTree,
+  leafIndex: 9n,
+})[0];
+
+//const assetId = UMIPublicKey("ApNvoWb8Ts9gJ31M3DU2G2YGmKY9DgzdnS72L5J4iw5z");
  
 // @ts-ignore
 const rpcAsset = await umi.rpc.getAsset(assetId);

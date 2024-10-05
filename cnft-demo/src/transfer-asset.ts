@@ -28,7 +28,8 @@ const umiKeypair = umi.eddsa.createKeypairFromSecretKey(localKeypair.secretKey);
 // load the MPL Bubblegum program, dasApi plugin and assign a signer to our umi instance
 umi.use(keypairIdentity(umiKeypair)).use(mplBubblegum()).use(dasApi());
 
-const assetId = UMIPublicKey("ApNvoWb8Ts9gJ31M3DU2G2YGmKY9DgzdnS72L5J4iw5z");
+//Asset id
+const assetId = UMIPublicKey("EtrZ6f5xW3ZmF3ALoLk5b91UjN3uMjZV2wn5sDhtzqyJ");
  
 //@ts-ignore
 const assetWithProof = await getAssetWithProof(umi, assetId);
