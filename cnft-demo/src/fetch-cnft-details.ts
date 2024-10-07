@@ -23,12 +23,12 @@ umi.use(keypairIdentity(umiKeypair)).use(mplBubblegum()).use(dasApi());
 
 const merkleTree = UMIPublicKey("2SXaxrvuKZh6MjLjPSWnSYNde5bQcjbktSzic3xXMLre");
 
-const assetId = findLeafAssetIdPda(umi, {
+/*const assetId = findLeafAssetIdPda(umi, {
   merkleTree,
-  leafIndex: 1n,
-})[0];
+  leafIndex: 5n,
+})[0];*/
 
-//const assetId = UMIPublicKey("ApNvoWb8Ts9gJ31M3DU2G2YGmKY9DgzdnS72L5J4iw5z");
+const assetId = UMIPublicKey("HyyTEZiZTbxr1YDNBE2vFuYbWqRLT8yLZKhEoZ8cqxpB");
  
 // @ts-ignore
 const rpcAsset = await umi.rpc.getAsset(assetId);
