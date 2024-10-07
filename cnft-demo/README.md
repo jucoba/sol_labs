@@ -10,5 +10,8 @@ You can transfer cNFT, it just change lead owner in the mapple tree, the cNFT re
 
 #Need to be solved
 Pending to validate id there is a way to transfer the cNFT to another mapple account
+
 How can this not being a centraliced solution given than for fetching the token the merkle tree account public Id must be known?
-How to get the change history of the metadada.
+=> With the method getAssetByOwner there is no need to know neither the mapple tree account nor the assetID
+
+How to get the change history of the token metadada.
