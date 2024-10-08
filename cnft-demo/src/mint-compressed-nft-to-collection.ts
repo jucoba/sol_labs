@@ -39,7 +39,7 @@ const uintSig = await(
     merkleTree,
     collectionMint,
     metadata: {
-      name: "My NFT 3",
+      name: "My NFT 4",
       uri: "https://chocolate-wet-narwhal-846.mypinata.cloud/ipfs/QmeBRVEmASS3pyK9YZDkRUtAham74JBUZQE3WD4u4Hibv9",
       sellerFeeBasisPoints: 0, // 0%
       collection: { key: collectionMint, verified: false },

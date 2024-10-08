@@ -25,11 +25,14 @@ const merkleTree = UMIPublicKey("2SXaxrvuKZh6MjLjPSWnSYNde5bQcjbktSzic3xXMLre");
 
 /*const assetId = findLeafAssetIdPda(umi, {
   merkleTree,
-  leafIndex: 5n,
+  leafIndex: 10n,
 })[0];*/
 
-const assetId = UMIPublicKey("HyyTEZiZTbxr1YDNBE2vFuYbWqRLT8yLZKhEoZ8cqxpB");
+const assetId = UMIPublicKey("BhTkxhEcbb65iiaF1Rnae5FqnrD9F11Nm1gQxndM7TFN");
  
 // @ts-ignore
 const rpcAsset = await umi.rpc.getAsset(assetId);
-console.log(rpcAsset);
+
+console.log("asset", rpcAsset);
+
+console.log("asset Metadata", rpcAsset.content.metadata);

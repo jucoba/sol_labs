@@ -13,5 +13,5 @@ const assets = await umi.rpc.getAssetsByOwner({
     owner,
     limit: 10
 });
-console.log(assets.items.length > 0);
+console.log("Assets number: ",assets.items.length);
 console.log(assets.items[0]);
